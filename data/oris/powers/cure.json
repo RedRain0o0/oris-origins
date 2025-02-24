@@ -1,0 +1,85 @@
+{
+  "type": "origins:multiple",
+
+  "time_to_cure": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1800,
+    "hud_render": {
+      "condition": {
+        "type": "origins:resource",
+        "resource": "*:*_time_to_cure",
+        "compare": "==",
+        "compare_to": 0
+      }
+    }
+  },
+
+  "time_to_reinfect": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 6000,
+    "hud_render": {
+      "condition": {
+        "type": "origins:resource",
+        "resource": "*:*_time_to_reinfect",
+        "compare": "==",
+        "compare_to": 0
+      }
+    }
+  },
+
+  "reinfect": {
+    "type": "action_over_time",
+    "entity_action": {
+      "type": "change_resource",
+      "resource": "*:*_time_to_reinfect",
+      "operation": "add",
+      "change": "-1"
+    },
+    "interval": 1,
+    "condition": {
+      "condition": {
+        "type": "origins:resource",
+        "resource": "*:*_time_to_infect",
+        "compare": "!=",
+        "compare_to": 0
+      }
+    }
+  },
+
+  "cure": {
+    "type": "action_over_time",
+    "entity_action": {
+      "type": "change_resource",
+      "resource": "*:*_time_to_cure",
+      "operation": "add",
+      "change": "-1"
+    },
+    "interval": 1,
+    "condition": {
+      "condition": {
+        "type": "origins:resource",
+        "resource": "*:*_time_to_cure",
+        "compare": "!=",
+        "compare_to": 0
+      }
+    }
+  },
+
+  "start_cure": {
+    "type": "origins:action_on_item_use",
+    "entity_action": {
+      "type": "change_resource",
+      "resource": "*:*_time_to_cure",
+      "operation": "set",
+      "change": "1800"
+    },
+    "item_condition": {
+      "type": "origins:ingredient",
+      "ingredient": {
+        "item": "minecraft:golden_apple"
+      }
+    }
+}
+}

@@ -1,0 +1,53 @@
+{
+  "type": "origins:multiple",
+
+  "no_trade": {
+    "type": "origins:prevent_entity_use",
+    "bientity_action": {
+      "type": "origins:actor_action",
+      "action": {
+        "type": "origins:execute_command",
+        "command": "title @s actionbar {\"text\": \"Cannot interact with villagers!\", \"color\": \"red\"}"
+      }
+    },
+    "bientity_condition": {
+      "type": "origins:target_condition",
+      "condition": {
+        "type": "origins:entity_type",
+        "entity_type": "minecraft:villager"
+      }
+    },
+    "condition": {
+      "type": "origins:resource",
+      "resource": "*:*_time_to_infect",
+      "compare": "==",
+      "compare_to": 0
+    }
+  },
+
+  "iron_hatred": {},
+
+  "burn_in_sun": {
+    "type": "action_over_time",
+    "entity_action": {
+      "type": "origins:set_on_fire",
+      "duration": 2
+    },
+    "interval": 5,
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:exposed_to_sun"
+        },
+        {
+          "type": "origins:equipped_item",
+          "equipment_slot": "head",
+          "item_condition": {
+            "type": "origins:empty"
+          }
+        }
+      ]
+    }
+  }
+}
